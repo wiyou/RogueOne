@@ -220,7 +220,7 @@ void footMotorDrive() {
         
 void playMP3N(int songNum) {
   //check that the number is odd for some reason the numbers on the dfplayer has playing a specific file always odd.
-  if(songNum==0) {
+  if(songNum%2==0) {
     songNum = songNum+1;  
   }
   #if (DEBUG>=1)
@@ -314,7 +314,8 @@ void domeDrive() {
         #endif
       }*/
       previousAutodomeMillis=currentMillis;
-      if (random(0,21)<=autoChatty) playMP3N(random(50,70)); //play a random general beepboop maybe
+      if (random(0,21)<=autoChatty) 
+      playMP3N(random(10,60)); //play a random general beepboop maybe
        }
     if (currentMillis-previousAutodomeMillis<autodomeMoveMillis) {
       ////motor is moving!
@@ -490,12 +491,18 @@ void loop() {
 
   getTransmitterValues();
   if (txChannels[SwB]!=prevTxChannels[SwB]) {
-      if (txChannels[SwB]==2000) {
+      if (txChannels[SwB]==2000 && txChannels[SwC]==1500) {
           playMP3N(67);  // vader march
+      } else if (txChannels[SwB]==1000 && txChannels[SwC]==1500) {
+        playMP3N(73);  // Starwars disco
+        #if (DEBUG>=1)
+          Serial_Debug.println("Playing Disco");
+        #endif
       }
   }
+  /*Changing D swticth to auto dome
   if (txChannels[SwD]!=prevTxChannels[SwD]) {
-    if (txChannels[SwD]==2000) {
+    if (txChannels[SwD]==2000 && txChannels[SwC]==1500) {
         playMP3N(73);  // Starwars disco
         #if (DEBUG>=1)
          Serial_Debug.println("Playing Disco");
@@ -507,18 +514,18 @@ void loop() {
           playMP3N(x);
           if(txChannels[SwD]==1500)
             break;
-        }*/
+        }
     } 
-  }
+  }*/
   if (txChannels[SwA]!=prevTxChannels[SwA]) {
-    if (txChannels[5]==1000) { 
+    if (txChannels[5]==1000 && txChannels[SwC]==1500) { 
       playMP3N(71);  // starwars intro 
-     #if (DEBUG>=1)
-      Serial_Debug.println("Playing Starwars");
-    #endif
+      #if (DEBUG>=1)
+        Serial_Debug.println("Playing Starwars");
+      #endif
     } 
   
-    if (txChannels[SwA]==2000) {
+    if (txChannels[SwA]==2000 && txChannels[SwC]==1500) {
       playMP3N(65);  //cantina band
     #if (DEBUG>=1)
       Serial_Debug.println("Playing Catina");
@@ -581,7 +588,8 @@ void loop() {
         #if (DEBUG>=1)
           Serial_Debug.print("Random play sad");
         #endif
-        playMP3N(75);
+        //playMP3N(75);
+        playMP3N(random(1,20));
       }
       else if (txChannels[VrA]<=1400) {
         digitalWrite(motivatorPin, LOW);
@@ -592,12 +600,11 @@ void loop() {
         Serial_JEDI.println();
         Serial_JEDI.print("\r@0T4\r"); //send an 0T4 to the dome so R5 can blow his motivator, or R2 can change up his logics
         //playMP3N(128); //short circuit
-        playMP3N(128);
+        playMP3N(79);
         delay(100);
         digitalWrite(motivatorPin, HIGH);
       }
       else if (txChannels[VrA]>=1800) {
-        Serial_Debug.print("Line 575");
         // center knob is almost all the way clockwise
         //playMP3(31); //laugh
         playMP3N(87);//laugh
@@ -609,7 +616,7 @@ void loop() {
       else {
         // center knob is close to center
         //play a random beepboop
-        playMP3N(random(1,50));
+        playMP3N(random(20,50));
       }
     }
     else if (txChannels[SwC]>=2000) {
@@ -646,10 +653,10 @@ void loop() {
     }
   }
 
-  if (txChannels[3]!=prevTxChannels[3] && txChannels[VrB]==2000) {
+  if (txChannels[VrB]!=prevTxChannels[VrB] && txChannels[SwC]==1500) {
     //use the left stick's vertical axis (ch3) to set volume
     //all the way up ch3=2000
-    volume( map(txChannels[3],1000,2000,minVolume,maxVolume) ); //volume levels between 100 and 255 are too quiet
+    volume( map(txChannels[VrB],1000,2000,minVolume,maxVolume) ); //volume levels between 100 and 255 are too quiet
     prevManualDomeMove=currentMillis; //prevents us from going into autodome as soon as the knob moves from 2000
   }
 
@@ -663,26 +670,31 @@ void loop() {
   }
 //too confusing left stick centered and Vra is less than clockwise
   //if (txChannels[3]>1020 && txChannels[3]<1950 && txChannels[VrA]<1950 && txChannels[3]!=prevTxChannels[3] && currentMillis-prevManualDomeMove>5000) {
-  if (txChannels[SwC]<1500 && txChannels[VrB]<1950 && txChannels[SwC]!=prevTxChannels[SwC] && currentMillis-prevManualDomeMove>5000) {
-    //all the way up ch3=2000
-    isAutodomeEnabled=true;
-    //autodomeInterval=txChannels[3]*5; //sets frequency of autodome moves based on the left sticks vertical position
-    autodomeInterval=map(txChannels[3],1000,2000,2000*5,1000); //sets frequency of autodome moves based on the left sticks vertical position
-    #if (DEBUG>=1)
-      //Serial_Debug.print("interval");
-      //Serial_Debug.println(autodomeInterval);
-    #endif  
+  if (txChannels[SwD]!=prevTxChannels[SwD]) {
+    if(txChannels[SwD] == 2000) {
+      //all the way up ch3=2000
+      isAutodomeEnabled=true;
+      //autodomeInterval=txChannels[3]*5; //sets frequency of autodome moves based on the left sticks vertical position
+      autodomeInterval=map(txChannels[3],1000,2000,2000*5,1000); //sets frequency of autodome moves based on the left sticks vertical position
+      #if (DEBUG>=1)
+        Serial_Debug.print("interval");
+        Serial_Debug.println(autodomeInterval);
+      #endif  
+    }
+    else if(txChannels[SwD] == 1000) {
+      isAutodomeEnabled=false;
+      if (prevAutodomeEnabled==true) {
+        prevAutodomeEnabled=false;
+        #if (DEBUG>=1)
+          Serial_Debug.println("autodome disabled");
+        #endif
+      }
+    }
   }
   // switch c center and a all the way clockwise 
   //if ((txChannels[3]!=prevTxChannels[3] && txChannels[SwC]!=1500) || txChannels[3]<1005 || txChannels[VrA]==2000)  {
-  if ((txChannels[SwC]!=prevTxChannels[SwC] && txChannels[SwC]!=1500) || txChannels[VrB]==2000)  {
-    isAutodomeEnabled=false;
-    if (prevAutodomeEnabled==true) {
-      prevAutodomeEnabled=false;
-      #if (DEBUG>=1)
-        Serial_Debug.println("autodome disabled");
-      #endif
-    }
+  if (txChannels[SwD]!=prevTxChannels[SwD])  {
+    
   }
   domeDrive();
 
