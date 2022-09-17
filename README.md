@@ -53,3 +53,20 @@ All toggles are up and the sticks for channel 1-4 are in neutral or down positio
 | N/A | N/A   | any position | N/A | middle to Down | Up | Play Random noise|
 | N/A | N/A   | N/A | adjust | toggle to middle position | Up | Change volume|
 | N/A | N/A   | N/A | N/A | N/A | toggle to down | Enable Auto Dome sounds|
+
+# Electronics
+
+**Parts list**
+1. [ELEGOO MEGA R3 Board ATmega 2560 + USB Cable Compatible with Arduino IDE Projects RoHS Compliant](https://www.amazon.com/ELEGOO-ATmega2560-ATMEGA16U2-Projects-Compliant/dp/B01H4ZLZLQ?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&psc=1&smid=A2WWHQ25ENKVJ1)
+2. ![ATmega](images/elegoo-board.jpg)
+3. [Flysky FS-iA10B receiver](https://hobbymatehobby.com/products/flysky-fs-ia10b-10ch-receiver-for-transmitter-fs-i10-fs-i6s-th9x-for-fpv-drone-rc-helicopter-telemetry-receiver-w-ppm-sbus?currency=USD&variant=32274066309169&gclid=CjwKCAjw4JWZBhApEiwAtJUN0KOPYcFzvfXK9iQGjkgz_hnRVqH_rOxxC0v8As5NhFmXVAHhFa9pgRoCuk4QAvD_BwE)
+4. ![Receiver](images/flysky-ia10b-receiver.jpg)  
+5. [DFRobot DFPlayer](https://www.digikey.com/en/products/detail/dfrobot/DFR0299/6588463?utm_adgroup=TANE%20ALARM%20PRODUCTS&utm_source=google&utm_medium=cpc&utm_campaign=Shopping_DK%2BSupplier_Tier%202%20-%20Block%202&utm_term=&utm_content=TANE%20ALARM%20PRODUCTS&gclid=CjwKCAjw4JWZBhApEiwAtJUN0EJeeAKlE_UHkRag86wsOOUmCqrXYDFXIqQU01XdTdXRZyFKTjDDXhoCWKMQAvD_BwE)
+6. ![DFplayer](images/dfplayer.jpg)  
+7. Micro SD Card 
+8. 3.5 Speaker
+
+The wiring looks something like this for the basic sound system. 
+![Electonic Diagram](images/WiredDiagram.png)
+
+
