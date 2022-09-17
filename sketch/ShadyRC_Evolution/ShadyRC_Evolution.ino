@@ -159,9 +159,9 @@ Sabertooth *SyR=new Sabertooth(SYREN_ADDR, Serial_ST);
 #endif
 
 #include <SoftwareSerial.h>
-SoftwareSerial Serial_JEDI(Serial_JEDI_RX, Serial_JEDI_TX); // RX, TX
-
-SoftwareSerial mySoftwareSerial(Serial_MP3_RX, Serial_MP3_TX); // RX, TX
+SoftwareSerial Serial_JEDI(Serial_JEDI_RX, Serial_JEDI_TX); // RX, TX on pins 12 and 13
+//MP3 DF Player serial 
+SoftwareSerial mySoftwareSerial(Serial_MP3_RX, Serial_MP3_TX); // RX, TX on pins 11 and 10
 
 //library used for iBus RC receiver...
 #include <IBusBM.h>
@@ -169,6 +169,14 @@ IBusBM IBus;
 #include "DFRobotDFPlayerMini.h"
 DFRobotDFPlayerMini myDFPlayer;
 
+#define IMPERIAL_MARCH 67
+#define THEME_SONG 71 
+#define DISCO 73
+#define CANTINA 65
+#define SCREAM 83
+#define WOLF 89
+#define LAUGH 87
+#define SAD 81
 // quick function to stop the feet depending on which drive system we're using...
 void stopFeet() {
   #if (FOOT_CONTROLLER==0)
@@ -465,10 +473,6 @@ void setup() {
   
   delay(1250); //the mp3trigger takes a second to start up, so we wait before setting its volume
   volume(vol);
-  //myDFPlayer.volume(30);
-  //delay(50);
-  //playMP3N(1);
-  //playMP3(255);
 
   Serial_JEDI.begin(JEDI_Baudrate);
   pinMode(motivatorPin, OUTPUT);
@@ -518,15 +522,15 @@ void loop() {
     } 
   }*/
   if (txChannels[SwA]!=prevTxChannels[SwA]) {
-    if (txChannels[5]==1000 && txChannels[SwC]==1500) { 
-      playMP3N(71);  // starwars intro 
+    if (txChannels[SwA]==1000 && txChannels[SwC]==1500) { 
+      playMP3N(THEME_SONG);  // starwars intro 71
       #if (DEBUG>=1)
         Serial_Debug.println("Playing Starwars");
       #endif
     } 
   
     if (txChannels[SwA]==2000 && txChannels[SwC]==1500) {
-      playMP3N(65);  //cantina band
+      playMP3N(CANTINA);  //cantina band 65
     #if (DEBUG>=1)
       Serial_Debug.println("Playing Catina");
     #endif
@@ -600,18 +604,18 @@ void loop() {
         Serial_JEDI.println();
         Serial_JEDI.print("\r@0T4\r"); //send an 0T4 to the dome so R5 can blow his motivator, or R2 can change up his logics
         //playMP3N(128); //short circuit
-        playMP3N(79);
-        delay(100);
+        //playMP3N(79);
+        delay(1000); //100
+        playMP3N(SCREAM);
         digitalWrite(motivatorPin, HIGH);
       }
       else if (txChannels[VrA]>=1800) {
         // center knob is almost all the way clockwise
-        //playMP3(31); //laugh
-        playMP3N(87);//laugh
+        playMP3N(LAUGH);//laugh 87
       }
       else if (txChannels[VrA]>=1600) {
         // center knob is a little left of center
-        playMP3(89); //wolf whistle
+        playMP3(WOLF); //wolf whistle 89
       }
       else {
         // center knob is close to center
