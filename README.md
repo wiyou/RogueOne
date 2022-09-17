@@ -4,7 +4,9 @@
 This is a modification of the Shady_RC by JoyMonkey. This was made to use the Flysky controller with 10 channels. The FS-I6X is relatively cheap digital controller. It uses a receiveer that has an IBus interface which plugs into the ATMega board. There is some setup with the controller out of the box. That is basically to assign the keys or map the keys to the right functions. This is more based off of ShadyRC, with modifications to a 10 channel receiver. 
 
 **References** 
+
 [Shadown MD](https://www.printed-droid.com/kb/shadow-md-droid-control-system/)
+
 [ShadyRC_Evelotion](https://github.com/joymonkey/dEvolution/blob/master/sketches/ShadyRC_Evolution/ShadyRC_Evolution.ino)
 
 ## FlySKY setup
