@@ -25,22 +25,18 @@
  * Right Stick Ch.2 = Throttle
  *  Left Stick Ch.3 = Autodome frequency, or Volume (when knob VrA is fully clockwise)
  *  Left Stick Ch.4 = Dome Rotation
- *  SwB is chanel6
- *  SwA is channel 5
- *  VrA is Channel 7
- *  VrB is Channel 8
- *  SwC is Channel 9
- *  SwD is Channel 10
+ *  SwA is channel 5   - Trigger cantina band or starwars theme
+ *  SwB is chanel  6   - Trigger march
+ *  VrA is Channel 7   - sound/function selector
+ *  VrB is Channel 8   - all the way clockwise will allow you to change the volume using the channel three throttle stick up and down.
+ *  SwC is Channel 9   - Trigger Sounds   *** Factory default for Ch.8 is disabled!)
+ *  SwD is Channel 10  - Trigger Disco dancing
  *  
- *  SwB (left) Ch.5 = Set Max Drive Speed   *** Factory default for Ch.5 is both SwB & SwC)
- *   SwA (mid) Ch.6 = Foot Drive Enable (up=off, down=on)
- *  VrA (knob) Ch.7 = sound/function selector
- * SwC (right) Ch.8 = Trigger Sounds   *** Factory default for Ch.8 is disabled!)
  *
  * Arduino Mega 2560/ADK Pinout
- *   Left Motor PWM : 44 (or Throttle for Drews setup)
+ *  Left Motor PWM : 44 (or Throttle for Drews setup)
  *  Right Motor PWM : 45 (or Steering for Drews setup
- *   MP3 Trigger Rx : 18 (Serial1 Tx)
+ *  MP3 Trigger Rx : 18 (Serial1 Tx)
  * iBus RC Receiver : 15 (Serial3 Rx)
  * SyRen/Sabertooth : 16 (Serial2 Tx)
  *
@@ -69,7 +65,7 @@
  *
  */
 
-#define DEBUG 2           //1 to enable debug mode (may make control choppy), 0 to disable, 1 for basics, 2 for extra 
+#define DEBUG 1           //1 to enable debug mode (may make control choppy), 0 to disable, 1 for basics, 2 for extra 
 
 #define FOOT_CONTROLLER 0  
                            //0 for individual R/C output (for Q85 motors with 1 controller for each foot, or Sabertooth Mode 2 Independant Mixing)
@@ -90,8 +86,8 @@
 #define Serial_Receiver Serial3 //Serial port used by the iBus RC receiver (only uses the TX pin from the Arduino)
 #define Serial_ST Serial2       //Serial port used by Sabertooth (feet) and/or Syren (dome) (only uses the TX pin from the Arduino)
 #define Serial_Debug Serial     //Serial port used by for debug messages
-#define Serial_JEDI_RX 10       //softserial pin used to receive JEDI/Jawalite commands
-#define Serial_JEDI_TX 9        //softserial pin used to send JEDI/Jawalite commands 
+#define Serial_JEDI_RX 12       //softserial pin used to receive JEDI/Jawalite commands
+#define Serial_JEDI_TX 12        //softserial pin used to send JEDI/Jawalite commands 
 #define Serial_MP3_RX 10       
 #define Serial_MP3_TX 11
 #define JEDI_Baudrate 2400
@@ -101,22 +97,23 @@
 int domeRotationSpeed,prevDomeRotationSpeed;
 #define motorControllerBaudRate 9600 //baud rate for Syren and/or Sabertooth
 #define SwA 5         //far left toggle switch
-#define SwB 6          //left toggle switch
+#define SwB 6         //left toggle switch
 #define VrA 7         // knob left
 #define VrB 8         // knob right
 #define SwC 9         // right 3 way toggle switch
-#define SwD 10         // right toggle switch
-
-byte vol = 20; // initial volume level, 0 = full volume, 255 off
-#define minVolume 3   //255=silent, anything over 100 is too quiet for my liking so I never go there
+#define SwD 10        // right toggle switch
+//using a DFPlayer from DF Robot
+byte vol = 20; // initial volume level, 30 = full volume, 3 off
+#define minVolume 3   //3=silent, anything under 10 is too quiet for my liking so I never go there
 #define maxVolume 30     //0=loudest, most obnoxious droid in the room
+
 byte maxDriveSpeed=0;  //Sabertooth uses a value of 0 to 127 for drive speed
 #if (FOOT_CONTROLLER==0)
   byte driveSpeeds[3] = {30,80,127};  //for individual R/C, these are the drivespeeds that we can toggle between (0=statue, 127=ludicrous)
 #elif (FOOT_CONTROLLER==1)
   byte driveSpeeds[3] = {30,60,90};  //for unmixed R/C, these are the drivespeeds that we can toggle between (0=statue, 90=ludicrous)
 #endif
-#define turnspeed 50    //turnspeed is used by the BHD mixing algorythm. might look into making this more dynamic in the future.
+#define turnspeed 50    //turnspeed is used by the BHD mixing algorithm. might look into making this more dynamic in the future.
 int leftFoot,rightFoot; //will hold foot speed values (-100 to 100)
 int steeringVal,throttleVal;
 boolean isStickEnabled = false; //changed to false so the feet don't take off immediately on power up (oops)
@@ -317,7 +314,7 @@ void domeDrive() {
         #endif
       }*/
       previousAutodomeMillis=currentMillis;
-      if (random(0,21)<=autoChatty) playMP3N(random(0,19)); //play a random general beepboop maybe
+      if (random(0,21)<=autoChatty) playMP3N(random(50,70)); //play a random general beepboop maybe
        }
     if (currentMillis-previousAutodomeMillis<autodomeMoveMillis) {
       ////motor is moving!
@@ -664,8 +661,9 @@ void loop() {
     #endif
     footMotorDrive();
   }
-
-  if (txChannels[3]>1020 && txChannels[3]<1950 && txChannels[VrA]<1950 && txChannels[3]!=prevTxChannels[3] && currentMillis-prevManualDomeMove>5000) {
+//too confusing left stick centered and Vra is less than clockwise
+  //if (txChannels[3]>1020 && txChannels[3]<1950 && txChannels[VrA]<1950 && txChannels[3]!=prevTxChannels[3] && currentMillis-prevManualDomeMove>5000) {
+  if (txChannels[SwC]<1500 && txChannels[VrB]<1950 && txChannels[SwC]!=prevTxChannels[SwC] && currentMillis-prevManualDomeMove>5000) {
     //all the way up ch3=2000
     isAutodomeEnabled=true;
     //autodomeInterval=txChannels[3]*5; //sets frequency of autodome moves based on the left sticks vertical position
@@ -675,7 +673,9 @@ void loop() {
       //Serial_Debug.println(autodomeInterval);
     #endif  
   }
-  if ((txChannels[3]!=prevTxChannels[3] && txChannels[SwC]!=1500) || txChannels[3]<1005 || txChannels[VrA]==2000)  {
+  // switch c center and a all the way clockwise 
+  //if ((txChannels[3]!=prevTxChannels[3] && txChannels[SwC]!=1500) || txChannels[3]<1005 || txChannels[VrA]==2000)  {
+  if ((txChannels[SwC]!=prevTxChannels[SwC] && txChannels[SwC]!=1500) || txChannels[VrB]==2000)  {
     isAutodomeEnabled=false;
     if (prevAutodomeEnabled==true) {
       prevAutodomeEnabled=false;
