@@ -41,11 +41,11 @@ All toggles are up and the sticks for channel 1-4 are in neutral or down positio
 
 | SwA | SwB | VrbA | VrbB | SwC | SwD | Description |
 | ----|-----|------|------|-----|-----|-------------|
-| From Up to Down| Up  | any position | Any Position | Middle position | Up | Play Cantina music|
-| From Down to Up| Up  | any position | Any Position | Middle position | Up | Play Starwars Intro music|
-| Up| Up to Down  | any position | Any Position | Middle position | Up | Play Imperial March music|
-| Up| Down to Up  | any position | Any Position | Middle position | Up | Play Starwars Disco music|
-| Up| Up  | any position | Any Position | middle to Up | Up | Play Random noise|
-| Up| Up  | any position | Any Position | middle to Down | Up | Play Random noise|
-| Up| Up  | any position | adjust | toggle to middle position | Up | Change volume|
-| Up| Up  | any position | Any Position | any position | toggle to down | Enable Auto Dome sounds|
+| From Up to Down| N/A   | N/A n | Adjust Volume | Middle position | Up | Play Cantina music|
+| From Down to Up| N/A   | N/A  | Adjust Volume | Middle position | Up | Play Starwars Intro music|
+| N/A | Up to Down  | N/A | Adjust Volume | Middle position | Up | Play Imperial March music|
+| N/A | Down to Up  | N/A | Adjust Volume | Middle position | Up | Play Starwars Disco music|
+| N/A | N/A   | any position | N/A | middle to Up | Up | Play Random noise|
+| N/A | N/A   | any position | N/A | middle to Down | Up | Play Random noise|
+| N/A | N/A   | N/A | adjust | toggle to middle position | Up | Change volume|
+| N/A | N/A   | N/A | N/A | N/A | toggle to down | Enable Auto Dome sounds|
