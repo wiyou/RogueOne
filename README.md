@@ -62,9 +62,9 @@ All toggles are up and the sticks for channel 1-4 are in neutral or down positio
 3. [Flysky FS-iA10B receiver](https://hobbymatehobby.com/products/flysky-fs-ia10b-10ch-receiver-for-transmitter-fs-i10-fs-i6s-th9x-for-fpv-drone-rc-helicopter-telemetry-receiver-w-ppm-sbus?currency=USD&variant=32274066309169&gclid=CjwKCAjw4JWZBhApEiwAtJUN0KOPYcFzvfXK9iQGjkgz_hnRVqH_rOxxC0v8As5NhFmXVAHhFa9pgRoCuk4QAvD_BwE)
 4. ![Receiver](images/flysky-ia10b-receiver.jpg)  
 5. [DFRobot DFPlayer](https://www.digikey.com/en/products/detail/dfrobot/DFR0299/6588463?utm_adgroup=TANE%20ALARM%20PRODUCTS&utm_source=google&utm_medium=cpc&utm_campaign=Shopping_DK%2BSupplier_Tier%202%20-%20Block%202&utm_term=&utm_content=TANE%20ALARM%20PRODUCTS&gclid=CjwKCAjw4JWZBhApEiwAtJUN0EJeeAKlE_UHkRag86wsOOUmCqrXYDFXIqQU01XdTdXRZyFKTjDDXhoCWKMQAvD_BwE)
-6. ![DFplayer](images/dfplayer.jpg)  
-7. Micro SD Card 
-8. 3.5 Speaker
+7. <img src="images/dfplayer.jpg" alt="DFPlayer" width="200"/>  
+8. Micro SD Card 
+9. 3.5 Speaker
 
 The wiring looks something like this for the basic sound system. 
 ![Electonic Diagram](images/WiredDiagram.png)
