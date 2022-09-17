@@ -10,6 +10,8 @@ This is a modification of the Shady_RC by JoyMonkey. This was made to use the Fl
 ## FlySKY setup
 There are two menu options if you long press the top right button it brings you to a setup menu. Press the up and down buttons on the left side to select if you want to system setup or functions setup.
 
+![Flysky FSi6](images/FS-i6X.png)
+
 Press the select button again "top right button" to make the menu selection.
 
 To back out of an option press the lower right button, which is a cancel button. 
