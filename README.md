@@ -69,7 +69,7 @@ All toggles are up and the sticks for channel 1-4 are in neutral or down positio
 - Micro SD Card 
 - 3.5 Speaker
 
-The wiring looks something like this for the basic sound system. 
+The wiring looks something like this for the basic sound system. But where the wires go out to the speaker in the below diagram you can route them to the input to an amplifier card like [TPA3116DA DC 12V 24V 100W Mono Channel Digital Power Audio Amplifier Board](https://smile.amazon.com/XH-M542-TPA3116DA-Amplifier-TPA3116D2-Capacity/dp/B07Z461JZX/ref=sr_1_6?crid=938EG4JLHB1L&keywords=TPA3116DA+DC+12V+24V+100W+Mono+Channel+Digital+Power+Audio+Amplifier+Board+TPA3116D2+Large&qid=1663602785&s=industrial&sprefix=tpa3116da+dc+12v+24v+100w+mono+channel+digital+power+audio+amplifier+board+tpa3116d2+large%2Cindustrial%2C167&sr=1-6)
 ![Electonic Diagram](images/WiredDiagram.png)
 
 
