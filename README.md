@@ -73,3 +73,20 @@ The wiring looks something like this for the basic sound system.
 ![Electonic Diagram](images/WiredDiagram.png)
 
 
+# Sound card
+Found a few tips about how the files are stored in the sound card. The DFPlayer is not super smart like the SparkFun MP3 Trigger....but with a lower cost comes a few extra steps but not hard.
+
+File names should be begin with 3 digit number and .mp3 file format extension. Examples that work: 001.mp3 or 001-BeepBop.mp3. The card can hold up to 1000 files per directory, but for R2 sounds the largest number of files of sounds I found were about 169. 
+
+In addtion those file numbers don't mean the actual order to play. What you should do is copy files over one at a time to the SD card by the number order. 
+
+## Mac Users
+**NOTE**: If you are using Mac OS X to copy the mp3, the file system will automatically add hidden files like: "._0001.mp3" for index, which this module will handle as valid mp3 files. It is really annoying. So you can run following command in terminal to eliminate those files.
+
+dot_clean /Volumes/<SDVolumeName>
+Please replace the to the volume name of your SD card.
+
+Further technical details: 
+[DFPlayer Spec sheet](https://wiki.dfrobot.com/DFPlayer_Mini_SKU_DFR0299)
+
+
