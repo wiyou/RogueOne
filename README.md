@@ -7,7 +7,7 @@ This is a modification of the Shady_RC by JoyMonkey. This was made to use the Fl
 
 [Shadown MD](https://www.printed-droid.com/kb/shadow-md-droid-control-system/)
 
-[ShadyRC_Evelotion](https://github.com/joymonkey/dEvolution/blob/master/sketches/ShadyRC_Evolution/ShadyRC_Evolution.ino)
+[ShadyRC_Evolution](https://github.com/joymonkey/dEvolution/blob/master/sketches/ShadyRC_Evolution/ShadyRC_Evolution.ino)
 
 ## FlySKY setup
 There are two menu options if you long press the top right or **OK** button it brings you to a setup menu. Press the up and down buttons on the left side to select if you want to system setup or functions setup.
