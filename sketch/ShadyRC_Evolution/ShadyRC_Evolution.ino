@@ -50,10 +50,15 @@
  * If your MP3Trigger is very old (pre 2013), you may need a firmware update for this to work.
  * For some reason my MP3Trigger's SD card has an ini file that tells it to run at 9600 baud. I believe the
  * default is 38400 baud, so you may need to change baud rate in this sketch or your ini file to get beepboops.
+ * Another note for Arduino on this project set the following:
+ * Serial monitor to: 115200 Baud
+ * Board type: Arduino Mega or Mega 2560 board type. 
  *
  * Libraries required :
  * https://github.com/bmellink/IBusBM
  * https://www.dimensionengineering.com/software/SabertoothArduinoLibraries.zip
+ *
+ * Libraries install in the folder above this project in libraries/
  *
  * Displaying Your Main Battery Level on the Turnigy Evolution:
  * On the TGY-iA6C receiver there is a little 2-pin JST port labeled BDet (short for bidet?). You can connect
